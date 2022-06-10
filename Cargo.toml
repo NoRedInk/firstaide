@@ -24,7 +24,7 @@ dirs = "4.0.0"
 fern = "0.6.1"
 log = "0.4.17"
 path-absolutize = "3.0.13"
-semver = "1.0.9"
+semver = "1.0.10"
 serde = { version = "1.0.137", features = ["derive"] }
 shell-quote = "0.3.0"
 spinners = "4.0.0"

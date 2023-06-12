@@ -22,7 +22,7 @@ clap = { version = "4.1.11", features = [ "std", "color", "suggestions", "derive
 crypto-hash = "0.3.4"
 dirs = "5.0.1"
 fern = "0.6.2"
-log = "0.4.17"
+log = "0.4.19"
 path-absolutize = "3.1.0"
 semver = "1.0.17"
 serde = { version = "1.0.163", features = ["derive"] }

@@ -27,6 +27,6 @@ path-absolutize = "3.1.0"
 semver = "1.0.17"
 serde = { version = "1.0.163", features = ["derive"] }
 shell-quote = "0.3.0"
-spinners = "4.1.0"
+spinners = "4.1.1"
 tempfile = "3.6.0"
 toml = "0.5.11"

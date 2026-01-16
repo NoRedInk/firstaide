@@ -21,7 +21,7 @@ chrono = "0.4.24"
 clap = { version = "4.1.11", features = [ "std", "color", "suggestions", "derive", "cargo" ] }
 crypto-hash = "0.3.4"
 dirs = "5.0.1"
-fern = "0.6.2"
+fern = "0.7.1"
 log = "0.4.17"
 path-absolutize = "3.1.0"
 semver = "1.0.17"

@@ -56,6 +56,18 @@ eval "$(firstaide hook)"
 
 Then run `firstaide build` (or `firstaide --help`).
 
+### Messages
+
+the `messages` section of `.firstaide.toml` allows you to configure the help text shown by direnv when the environment is inactive, stale, and loaded
+
+by default the messages are set as follows:
+
+```toml
+[messages]
+getting_started = "firstaide --help" # displayed when direnv loads successfully
+stale = "firstaide build"
+inactive = "build firstaide and run \"firstaide build\""
+```
 
 ## To develop:
 

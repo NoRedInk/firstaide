@@ -51,15 +51,31 @@ impl AsRef<Path> for ParentDir {
 
 #[derive(Debug, Deserialize)]
 pub struct Messages {
+    #[serde(default = "default_getting_started")]
     pub getting_started: String,
+    #[serde(default = "default_stale")]
+    pub stale: String,
+    #[serde(default = "default_inactive")]
+    pub inactive: String,
 }
-
 impl Default for Messages {
     fn default() -> Self {
         Self {
-            getting_started: "aide --help".into(),
+            getting_started: default_getting_started(),
+            stale: default_stale(),
+            inactive: default_inactive(),
         }
     }
+}
+
+fn default_getting_started() -> String {
+    "firstaide --help".to_string()
+}
+fn default_stale() -> String {
+    "firstaide build".to_string()
+}
+fn default_inactive() -> String {
+    "build firstaide and run \"firstaide build\"".to_string()
 }
 
 impl Config {

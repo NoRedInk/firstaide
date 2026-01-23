@@ -91,18 +91,18 @@ impl Command {
                 );
                 env_diff.simplify();
                 if sums::equal(&sums_now, &cache.sums) {
-                    let chunk_message = bash::escape(&config.messages.getting_started);
-                    let chunk_content =
-                        include_bytes!("hook/active.sh").replace(b"__MESSAGE__", chunk_message);
+                    let getting_started_message = bash::escape(&config.messages.getting_started);
+                    let chunk_content = include_bytes!("hook/active.sh")
+                        .replace(b"__MESSAGE__", getting_started_message);
                     handle
                         .write_all(&chunk(&EnvironmentStatus::Okay.display(), &chunk_content))
                         .context("could not write active hook")?;
                 } else {
+                    let stale_message = bash::escape(&config.messages.stale);
+                    let chunk_content =
+                        include_bytes!("hook/stale.sh").replace(b"__MESSAGE__", stale_message);
                     handle
-                        .write_all(&chunk(
-                            &EnvironmentStatus::Stale.display(),
-                            include_bytes!("hook/stale.sh"),
-                        ))
+                        .write_all(&chunk(&EnvironmentStatus::Stale.display(), &chunk_content))
                         .context("could not write stale hook")?;
                 }
                 handle
@@ -137,10 +137,13 @@ impl Command {
                 }
             }
             Err(_) => {
+                let inactive_message = bash::escape(&config.messages.inactive);
+                let chunk_content =
+                    include_bytes!("hook/inactive.sh").replace(b"__MESSAGE__", inactive_message);
                 handle
                     .write_all(&chunk(
                         &EnvironmentStatus::Unknown.display(),
-                        include_bytes!("hook/inactive.sh"),
+                        &chunk_content,
                     ))
                     .context("could not write inactive hook")?;
                 handle

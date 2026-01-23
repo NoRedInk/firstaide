@@ -38,6 +38,13 @@ example, `build_exe` might point to a script like this:
 exec nix-shell --run "$(printf '%q ' "$@")"
 ```
 
+or with flakes:
+
+```bash
+#!/usr/bin/env bash
+exec nix develop --command $(printf '%q ' "$@")
+```
+
 `watch_exe` is an executable or script that emits a null-separated list of
 filenames for direnv to watch; firstaide passes these names to direnv's
 `watch_file` function. For example, the following script would ask direnv to

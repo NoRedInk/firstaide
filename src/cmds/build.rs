@@ -92,7 +92,7 @@ fn build(config: config::Config) -> Result<u8> {
 
     // 5. Calculate checksums.
     log::info!("Calculate file checksums.");
-    let checksums = spin(|| sums::Checksums::from(&config.watch_files()?))
+    let checksums = spin(|| sums::Checksums::from(&config.build_dir, &config.watch_files()?))
         .context("could not calculate checksums")?;
     let cache_file = config.cache_file(&checksums);
 

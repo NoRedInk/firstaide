@@ -181,7 +181,7 @@ impl Config {
     }
 
     /// Return an absolute path, resolved relative to `self.build_dir`.
-    fn abspath<T: AsRef<Path>>(&self, path: T) -> PathBuf {
+    pub fn abspath<T: AsRef<Path>>(&self, path: T) -> PathBuf {
         let p = path.as_ref();
         if p.is_relative() {
             self.build_dir.join(p)

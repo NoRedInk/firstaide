@@ -1,6 +1,6 @@
 [package]
 name = "firstaide"
-version = "0.1.6"
+version = "0.1.7"
 authors = ["Gavin Panella <gavinpanella@gmail.com>"]
 edition = "2018"
 description = "Bootstrap and cache Nix environments; works with direnv."

@@ -23,9 +23,11 @@ impl Command {
         let stdout = io::stdout();
         let mut handle = stdout.lock();
 
-        let sums_now =
-            sums::Checksums::from(&config.watch_files().context("could not get watch files")?)
-                .context("could not calculate checksums")?;
+        let sums_now = sums::Checksums::from(
+            &config.build_dir,
+            &config.watch_files().context("could not get watch files")?,
+        )
+        .context("could not calculate checksums")?;
         let cache_file = config.cache_file(&sums_now);
         let cache_file_fallback = config.cache_file_most_recent();
 

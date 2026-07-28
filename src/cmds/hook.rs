@@ -75,7 +75,7 @@ impl Command {
             .write_all(&chunk("Helpers.", include_bytes!("hook/helpers.sh")))
             .context("could not write helpers")?;
 
-        let sums_now = sums::Checksums::from(&config.watch_files()?)?;
+        let sums_now = sums::Checksums::from(&config.build_dir, &config.watch_files()?)?;
         let cache_file = config.cache_file(&sums_now);
         let cache_file_fallback = config.cache_file_most_recent();
 
@@ -116,8 +116,10 @@ impl Command {
                 {
                     let mut watches = Vec::with_capacity(8192); // 8kB enough?
                     watches.extend(b"watch_file \\\n  ");
+                    // Checksum paths are relative to the build directory (or
+                    // absolute, in caches written by older versions).
                     for watch in cache.sums.into_iter() {
-                        bash::escape_into(watch.path(), &mut watches);
+                        bash::escape_into(&config.abspath(watch.path()), &mut watches);
                         watches.extend(b" \\\n  ");
                     }
                     // Also watch the cache file, the build log, the build
